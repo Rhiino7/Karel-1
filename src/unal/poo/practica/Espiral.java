@@ -19,11 +19,13 @@ public class Espiral
             
             //Direction.NORTH, EAST, SOUTH, WEST
             //Definicion de la ubicacion del robot, Ciudad, posicion, Direccion, Numero things en el bolso.
-            estudiante = new Robot(objetos,1, 0, Direction.EAST,10);
-            
+            estudiante = new Robot(objetos,1, 0, Direction.EAST,0);
+                                    
             for(int i=5;i>0;i--){
-                move(i);
-                turn(3);
+                for(int j=2;j>0;j--){
+                    move(i);
+                    turn(3);
+                }
             }
 	}
         
@@ -40,8 +42,14 @@ public class Espiral
         }
         
         public static void move(int parametroEntrada){
-            for (int i = 0; i < parametroEntrada; i++) 
+            
+            boolean puedeTomar = estudiante.canPickThing();
+            
+            for (int i = 0; i < parametroEntrada; i++){
+                if(puedeTomar)
+                    estudiante.pickThing();
                 estudiante.move();
+            }
         }
         
         public static void turn(int parametroEntrada){
